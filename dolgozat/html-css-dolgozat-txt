@@ -1,0 +1,50 @@
+Ha egy olyan témájú weboldalt szeretnél a diákoknak adni, amely lehetőséget biztosít a fenti CSS miniprojektek kreatív beépítésére, akkor az alábbi ötletek jó kiindulópontok lehetnek:
+
+1. Interaktív Portfolio vagy Személyes Bemutatkozó Oldal
+Miért jó? A diákok saját magukat vagy egy kitalált karaktert mutathatnak be, és különböző CSS technikákat alkalmazhatnak az egyedi megjelenés érdekében.
+✅ Ajánlott CSS elemek:
+Animált háttér (Animated Background Gradient) – dinamikus fejléc
+Hover Effektusok (Hover Effects on Cards, Hover Image Gallery) – képek vagy projektek bemutatásához
+CSS Grid vagy Flexbox (Responsive Grid with CSS Variables) – projektek elrendezésére
+Éjszakai mód (Night Mode Toggle Button) – egyedi UI
+
+2. Egy Képzeletbeli Cég Weboldala
+Miért jó? A diákok választhatnak egy fiktív vállalkozást (pl. kávézó, webdesign cég, autószerviz) és ehhez igazíthatják a dizájnt.
+✅ Ajánlott CSS elemek:
+Sticky Navigáció (Sticky Navigation Bar) – fix fejléc navigáció
+CSS Animációk (CSS Animations, Pulse Animation Effect) – gombok és elemek animálása
+Lapozható galéria (CSS-only Tabs, CSS Hover Image Gallery) – szolgáltatások bemutatásához
+Formázott checkboxok (Custom Animated Checkbox) – ajánlatkérő űrlaphoz
+
+3. Online Magazin vagy Blog egy Témában
+Miért jó? A diákok egy kedvenc témájukban (pl. technológia, sport, filmek) hozhatnak létre egy cikkoldalt, ami lehetőséget ad a különböző dizájnelemek bemutatására.
+✅ Ajánlott CSS elemek:
+Lapozható cikkek (CSS-only Accordion, CSS-only Tabs) – összecsukható cikkek
+Infinite Scrolling Text Animation – futó szalagcímek
+Fixed Background Scrolling Effect – parallax háttérképek
+CSS Scroll Snap – szekciók közötti sima görgetés
+
+4. Interaktív Idővonal egy Történelmi vagy Fantázia Témában
+Miért jó? Egy adott esemény vagy sztori bemutatására kiválóan alkalmas egy interaktív idővonal.
+✅ Ajánlott CSS elemek:
+Responsive CSS Timeline – események vizuális megjelenítéséhez
+Flip Card Effect Using CSS – információk elrejtéséhez és megjelenítéséhez
+Rotating Words with CSS Animations – címek kiemelésére
+CSS Grid with Overlapping Items – egyedi, összetett elrendezés
+
+5. Játék vagy Puzzle Weboldal
+Miért jó? Egy egyszerű interaktív játék vagy rejtvényoldal, ahol CSS segítségével kreatív vizuális megoldásokat használhatnak.
+✅ Ajánlott CSS elemek:
+3D CSS Cube – forgatható elem a játékhoz
+Pure CSS Modal Popup – nyeremény vagy hibaüzenetek megjelenítéséhez
+Neumorphic Button Design – modern, vizuálisan izgalmas gombok
+CSS Perspective Hover Effect – kártyás játék vagy interaktív elemek kiemelésére
+
+Melyiket ajánlanám?
+Ha személyes kreativitásra bíznád: Portfólió vagy Személyes Bemutatkozó Oldal
+Ha valami realisztikusabbat szeretnél: Képzeletbeli Cég Weboldala
+Ha tanulási céllal csinálnád: Online Magazin vagy Blog
+Ha vizuálisan látványos dolgot akarsz: Interaktív Idővonal
+Ha kicsit játékosabb oldalt szeretnél: Játék vagy Puzzle Weboldal
+Melyik ötlet tetszik legjobban? 😊
+
