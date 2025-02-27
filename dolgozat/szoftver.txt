@@ -1,0 +1,145 @@
+A **HR Portal** kalkulátorainak teszteléséhez különböző tesztelési megközelítések alkalmazhatók attól függően, hogy funkcionális, teljesítmény- vagy biztonsági tesztet szeretnél végezni.  
+
+---
+
+## **1️⃣ Funkcionális tesztelés (Automatizált UI teszt)**  
+Ha azt szeretnéd ellenőrizni, hogy a kalkulátor megfelelően működik, akkor egy **automatizált UI teszt** jó megoldás lehet.  
+
+### **📌 Selenium + C# megoldás**  
+A következő példa Selenium WebDriver használatával mutatja be, hogyan lehet egy kalkulátort tesztelni.  
+
+#### **🔹 Lépések:**  
+1. Megnyitja a HR Portal kalkulátort.  
+2. Kitölti a mezőket.  
+3. Ellenőrzi, hogy az eredmény megjelenik-e és helyes-e.  
+
+#### **🔹 Kód:**
+```csharp
+using System;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Support.UI;
+using NUnit.Framework;
+
+[TestFixture]
+public class HRPortalCalculatorTests
+{
+    private IWebDriver driver;
+
+    [SetUp]
+    public void Setup()
+    {
+        driver = new ChromeDriver();
+        driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+    }
+
+    [Test]
+    public void CalculateNetSalary_ShouldReturn_ExpectedResult()
+    {
+        driver.Navigate().GoToUrl("http://www.hrportal.hu/kalkulatorok");
+
+        // Válaszd ki a megfelelő kalkulátort (pl. Nettó bér kalkulátor)
+        driver.FindElement(By.LinkText("Nettó bér kalkulátor")).Click();
+
+        // Írd be a bruttó bért
+        var salaryInput = driver.FindElement(By.Id("brutto"));
+        salaryInput.Clear();
+        salaryInput.SendKeys("500000");
+
+        // Kattints a "Számol" gombra
+        driver.FindElement(By.Id("calculate-button")).Click();
+
+        // Eredmény ellenőrzése
+        var result = driver.FindElement(By.Id("netto-ber")).Text;
+        Assert.IsTrue(result.Contains("333000"), "Az elvárt nettó bér nem egyezik.");
+    }
+
+    [TearDown]
+    public void TearDown()
+    {
+        driver.Quit();
+    }
+}
+```
+**🔹 Mit csinál a fenti kód?**  
+✅ Megnyitja a HR Portal kalkulátort.  
+✅ Beír egy bruttó bért (500 000 Ft).  
+✅ Elindítja a kalkulációt.  
+✅ Ellenőrzi, hogy a várt nettó összeg megjelenik-e.
+
+---
+
+## **2️⃣ API vagy háttérrendszer tesztelése**  
+Ha a kalkulátor háttérben egy API-t használ, akkor az API közvetlen tesztelése **Postman, RestSharp vagy HttpClient** segítségével is elvégezhető.
+
+📌 **C# API teszt példa (RestSharp használatával):**
+```csharp
+using NUnit.Framework;
+using RestSharp;
+using System.Threading.Tasks;
+
+[TestFixture]
+public class CalculatorApiTests
+{
+    private const string BaseUrl = "http://www.hrportal.hu/api"; // Ezt ellenőrizni kell
+
+    [Test]
+    public async Task GetNetSalary_ShouldReturn_CorrectAmount()
+    {
+        var client = new RestClient(BaseUrl);
+        var request = new RestRequest("/calculate-netto", Method.Get);
+        request.AddParameter("brutto", 500000);
+
+        var response = await client.ExecuteAsync(request);
+        Assert.IsTrue(response.Content.Contains("333000"), "Az API által visszaadott nettó bér nem megfelelő.");
+    }
+}
+```
+🔹 **Előny:** Az API teszt gyorsabb és pontosabb, ha van közvetlen végpont.  
+
+---
+
+## **3️⃣ Terheléses tesztelés (Load Testing)**
+A **terheléses tesztelés** segít megállapítani, hogy a kalkulátor nagy forgalom esetén is megfelelően működik-e.  
+
+📌 **K6 példa:**
+```js
+import http from 'k6/http';
+import { check, sleep } from 'k6';
+
+export let options = {
+  vus: 50, // 50 egyidejű felhasználó
+  duration: '30s', // 30 másodpercig fut
+};
+
+export default function () {
+  let res = http.get('http://www.hrportal.hu/kalkulatorok');
+  check(res, { 'status was 200': (r) => r.status == 200 });
+  sleep(1);
+}
+```
+🔹 **Mit csinál?**  
+✅ 50 felhasználó egyszerre használja a kalkulátort 30 másodpercig.  
+✅ Ellenőrzi, hogy az oldal válaszideje megfelelő-e.  
+
+---
+
+## **4️⃣ Biztonsági tesztelés**  
+A **biztonsági tesztelés** segít az érzékeny adatok védelmének ellenőrzésében. Ehhez **OWASP ZAP** vagy **Burp Suite** használható.  
+
+📌 **Tesztelendő területek:**  
+- **SQL injection**: Kipróbálhatod, hogy beírható-e `' OR '1'='1` egy mezőbe.  
+- **Cross-Site Scripting (XSS)**: Megpróbálhatod `<script>alert('XSS')</script>` beírását.  
+
+---
+
+## **Összegzés**
+| Tesztelési típus | Megoldás |
+|------------------|----------|
+| **UI funkcionális teszt** | Selenium WebDriver + C# |
+| **API teszt** | RestSharp vagy Postman |
+| **Terheléses teszt** | K6 vagy JMeter |
+| **Biztonsági teszt** | OWASP ZAP, Burp Suite |
+
+Ha egy teljes körű tesztelést szeretnél elvégezni, érdemes több módszert is kombinálni! 🚀
+
