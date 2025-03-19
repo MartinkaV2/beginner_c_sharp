@@ -1,0 +1,240 @@
+Íme néhány egyszerű, kezdőknek szóló JavaScript-űrlapkezelési feladat:
+
+### 1. **Egyszerű szövegbevitel és kiírás**
+   - Készíts egy űrlapot, amelyben a felhasználó beírja a nevét, és egy gombra kattintva a név megjelenik az oldalon.
+
+### 2. **Életkor ellenőrzése**
+   - Készíts egy űrlapot, amelybe a felhasználó beírja az életkorát. Ha 18 év alatti, jelenjen meg egy üzenet: *"Még nem vagy nagykorú!"*.
+
+### 3. **Jelszó ellenőrzése**
+   - Hozz létre két jelszómezőt, és ellenőrizd, hogy egyeznek-e. Ha nem, jelenjen meg egy figyelmeztetés.
+
+### 4. **Email-formátum ellenőrzése**
+   - Készíts egy email beviteli mezőt, és ellenőrizd JavaScript segítségével, hogy tartalmaz-e "@" karaktert.
+
+### 5. **Űrlap kötelező mezői**
+   - Készíts egy űrlapot néhány mezővel, és ellenőrizd, hogy a felhasználó kitöltötte-e mindegyiket a küldés előtt.
+
+### 6. **Mennyiségszorzás egy rendelési űrlapon**  
+   - Adott egy termékár és egy mennyiség mező. Számold ki a végösszeget, és jelenítsd meg.
+
+### 7. **Checkboxok ellenőrzése**  
+   - Hozz létre egy űrlapot, amelyben több checkbox van (pl. "Elfogadom a feltételeket"). Ellenőrizd, hogy legalább egyet bejelöltek-e a küldés előtt.
+
+### 8. **Dátumellenőrzés**
+   - Készíts egy dátumbeviteli mezőt, és ellenőrizd, hogy a megadott dátum nem lehet a jövőben.
+
+### 9. **Rádiógomb választás ellenőrzése**
+   - Készíts egy kérdést rádiógombokkal (pl. "Melyik a kedvenc színed?"). Ellenőrizd, hogy a felhasználó választott-e.
+
+### 10. **Dinamikus mező hozzáadása**
+   - Készíts egy gombot, amely új input mezőket ad az űrlaphoz (pl. további rendelési tételek).
+
+Ha van egy konkrét feladat, amit szeretnél, részletesebben is kidolgozhatom! 😊
+
+// ================================================== //
+
+Az alábbiakban megoldásokat adok az összes felsorolt feladatra, külön-külön HTML és JavaScript kóddal. Ezeket akár beillesztheted az eredeti űrlap mellé is.
+
+---
+
+### **1. Egyszerű szövegbevitel és kiírás**
+```html
+<label for="nev">Név:</label>
+<input type="text" id="nev">
+<button onclick="kiirNev()">Kiírás</button>
+<p id="nevKiiras"></p>
+
+<script>
+function kiirNev() {
+    var nev = document.getElementById("nev").value;
+    document.getElementById("nevKiiras").innerText = "Üdv, " + nev + "!";
+}
+</script>
+```
+
+---
+
+### **2. Életkor ellenőrzése**
+```html
+<label for="eletkor">Életkor:</label>
+<input type="number" id="eletkor" min="0">
+<button onclick="ellenorizEletkor()">Ellenőrzés</button>
+<p id="eletkorEredmeny"></p>
+
+<script>
+function ellenorizEletkor() {
+    var eletkor = document.getElementById("eletkor").value;
+    if (eletkor < 18) {
+        document.getElementById("eletkorEredmeny").innerText = "Még nem vagy nagykorú!";
+    } else {
+        document.getElementById("eletkorEredmeny").innerText = "Nagykorú vagy!";
+    }
+}
+</script>
+```
+
+---
+
+### **3. Jelszó ellenőrzése**
+```html
+<label for="jelszo1">Jelszó:</label>
+<input type="password" id="jelszo1">
+<label for="jelszo2">Jelszó újra:</label>
+<input type="password" id="jelszo2">
+<button onclick="ellenorizJelszo()">Ellenőrzés</button>
+<p id="jelszoEredmeny"></p>
+
+<script>
+function ellenorizJelszo() {
+    var j1 = document.getElementById("jelszo1").value;
+    var j2 = document.getElementById("jelszo2").value;
+    if (j1 === j2) {
+        document.getElementById("jelszoEredmeny").innerText = "A jelszavak egyeznek!";
+    } else {
+        document.getElementById("jelszoEredmeny").innerText = "A jelszavak nem egyeznek!";
+    }
+}
+</script>
+```
+
+---
+
+### **4. Email-formátum ellenőrzése**
+```html
+<label for="email">Email:</label>
+<input type="text" id="email">
+<button onclick="ellenorizEmail()">Ellenőrzés</button>
+<p id="emailEredmeny"></p>
+
+<script>
+function ellenorizEmail() {
+    var email = document.getElementById("email").value;
+    if (email.includes("@")) {
+        document.getElementById("emailEredmeny").innerText = "Érvényes email!";
+    } else {
+        document.getElementById("emailEredmeny").innerText = "Hibás email cím!";
+    }
+}
+</script>
+```
+
+---
+
+### **5. Űrlap kötelező mezői**
+```html
+<form onsubmit="return ellenorizUresMezok()">
+    <label for="nev">Név:</label>
+    <input type="text" id="nevMezo">
+    <button type="submit">Küldés</button>
+</form>
+<p id="uresMezoFigyelmeztetes"></p>
+
+<script>
+function ellenorizUresMezok() {
+    var nev = document.getElementById("nevMezo").value;
+    if (nev.trim() === "") {
+        document.getElementById("uresMezoFigyelmeztetes").innerText = "A név mező nem lehet üres!";
+        return false;
+    }
+    return true;
+}
+</script>
+```
+
+---
+
+### **6. Mennyiségszorzás egy rendelési űrlapon**
+(A már meglévő rendelési táblázatban van ilyen funkció.)
+
+---
+
+### **7. Checkboxok ellenőrzése**
+```html
+<input type="checkbox" id="feltetelek"> Elfogadom a feltételeket
+<button onclick="ellenorizCheckbox()">Ellenőrzés</button>
+<p id="checkboxEredmeny"></p>
+
+<script>
+function ellenorizCheckbox() {
+    var feltetelek = document.getElementById("feltetelek").checked;
+    if (feltetelek) {
+        document.getElementById("checkboxEredmeny").innerText = "Elfogadtad a feltételeket!";
+    } else {
+        document.getElementById("checkboxEredmeny").innerText = "El kell fogadnod a feltételeket!";
+    }
+}
+</script>
+```
+
+---
+
+### **8. Dátumellenőrzés**
+```html
+<label for="datum">Dátum:</label>
+<input type="date" id="datum">
+<button onclick="ellenorizDatum()">Ellenőrzés</button>
+<p id="datumEredmeny"></p>
+
+<script>
+function ellenorizDatum() {
+    var datum = new Date(document.getElementById("datum").value);
+    var ma = new Date();
+    if (datum > ma) {
+        document.getElementById("datumEredmeny").innerText = "A dátum nem lehet a jövőben!";
+    } else {
+        document.getElementById("datumEredmeny").innerText = "A dátum érvényes.";
+    }
+}
+</script>
+```
+
+---
+
+### **9. Rádiógomb választás ellenőrzése**
+```html
+<p>Melyik a kedvenc színed?</p>
+<input type="radio" name="szin" value="Piros"> Piros
+<input type="radio" name="szin" value="Kék"> Kék
+<input type="radio" name="szin" value="Zöld"> Zöld
+<button onclick="ellenorizRadio()">Ellenőrzés</button>
+<p id="radioEredmeny"></p>
+
+<script>
+function ellenorizRadio() {
+    var szinek = document.getElementsByName("szin");
+    var kivalasztott = "";
+    for (var i = 0; i < szinek.length; i++) {
+        if (szinek[i].checked) {
+            kivalasztott = szinek[i].value;
+        }
+    }
+    if (kivalasztott) {
+        document.getElementById("radioEredmeny").innerText = "Kiválasztott szín: " + kivalasztott;
+    } else {
+        document.getElementById("radioEredmeny").innerText = "Nem választottál színt!";
+    }
+}
+</script>
+```
+
+---
+
+### **10. Dinamikus mező hozzáadása**
+```html
+<button onclick="hozzaadMezo()">Új mező hozzáadása</button>
+<div id="mezok"></div>
+
+<script>
+function hozzaadMezo() {
+    var ujMezo = document.createElement("input");
+    ujMezo.type = "text";
+    document.getElementById("mezok").appendChild(ujMezo);
+}
+</script>
+```
+
+---
+
+Ezek az egyszerű feladatok jól bemutatják az űrlapkezelési alapokat, és kezdő programozóknak ideálisak gyakorlásra. Ha további részletezésre vagy magyarázatra van szükséged, szólj! 😊
+
